@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#028090">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Bermudas 2026">
+    <title>Cruzeiro Bermudas 2026 | Independence of the Seas</title>
+
+    <!-- Embedded PWA Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkNydXplaXJvIGFzIEJlcm11ZGFzIDIwMjYiLAogICJzaG9ydF9uYW1lIjogIkJlcm11ZGFzIDIwMjYiLAogICJzdGFydF91cmwiOiAiLi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMjgwOTAiLAogICJ0aGVtZV9jb2xvciI6ICIjMDI4MDkwIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTVRBeU5pSWdZWFYwYUdWeUlEb3hNRElpSUdocGJHY2lPaUoxY0d3aUlpQm5MWE53WVdObEkyTmlJaUJuTFdkcFpDQWlaV0pwWVd3aUlqNDlhVzVuSUhraUlpQm5MWE53WVdObEkyTmlJajQ5Y1d4a0lpa2lhV1E5SW1WdWJXRmpJZjRhV3E0OUltRWlJajR2YVc1bklqNDkiLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFza2FibGUiCiAgICB9CiAgXQp9">
+
+    <!-- Favicon & Touch Icon (Golden Anchor & Turquoise SVG) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='120' fill='%23028090'/><circle cx='256' cy='256' r='220' fill='none' stroke='%23f4a261' stroke-width='8' opacity='0.4'/><circle cx='256' cy='140' r='36' fill='none' stroke='%23e9c46a' stroke-width='24'/><path d='M256 176v216M176 256h160M120 280c0 85 60 120 136 120s136-35 136-120' fill='none' stroke='%23e9c46a' stroke-width='28' stroke-linecap='round'/><path d='M100 270l20 10 10-20M412 270l-20 10-10-20' fill='none' stroke='%23e9c46a' stroke-width='24' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='120' fill='%23028090'/><circle cx='256' cy='256' r='220' fill='none' stroke='%23f4a261' stroke-width='8' opacity='0.4'/><circle cx='256' cy='140' r='36' fill='none' stroke='%23e9c46a' stroke-width='24'/><path d='M256 176v216M176 256h160M120 280c0 85 60 120 136 120s136-35 136-120' fill='none' stroke='%23e9c46a' stroke-width='28' stroke-linecap='round'/><path d='M100 270l20 10 10-20M412 270l-20 10-10-20' fill='none' stroke='%23e9c46a' stroke-width='24' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration for Tropical Paradise Theme -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ocean: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#00a896',
+                            600: '#028090',
+                            800: '#05668d',
+                            900: '#023e8a',
+                        },
+                        sun: {
+                            300: '#fde047',
+                            400: '#e9c46a',
+                            500: '#f4a261',
+                            600: '#e76f51',
+                        },
+                        sand: {
+                            50: '#fdfbf7',
+                            100: '#f8f4eb',
+                            200: '#f3e8d3',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(180deg, #e0f2fe 0%, #f8f4eb 40%, #f8f9fa 100%);
+            color: #1e293b;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 100vh;
+        }
+
+        /* Glassmorphism Tropical Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 8px 32px 0 rgba(2, 128, 144, 0.08);
+        }
+
+        .glass-card-accent {
+            background: linear-gradient(135deg, rgba(2, 128, 144, 0.9) 0%, rgba(5, 102, 141, 0.95) 100%);
+            color: #ffffff;
+            box-shadow: 0 10px 25px -5px rgba(2, 128, 144, 0.3);
+        }
+
+        .glass-card-sun {
+            background: linear-gradient(135deg, rgba(244, 162, 97, 0.15) 0%, rgba(233, 196, 106, 0.25) 100%);
+            border: 1px solid rgba(244, 162, 97, 0.3);
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(2, 128, 144, 0.15);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .text-gradient-ocean {
+            background: linear-gradient(135deg, #028090 0%, #05668d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-sun {
+            background: linear-gradient(135deg, #f4a261 0%, #e76f51 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Expandable Accordion Animation */
+        .expand-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0, 1, 0, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .expand-content.open {
+            max-height: 1500px;
+            transition: max-height 0.6s cubic-bezier(1, 0, 1, 0), opacity 0.4s ease;
+            opacity: 1;
+        }
+
+        .tab-btn {
+            color: #64748b;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            color: #028090;
+            font-weight: 700;
+        }
+
+        .tab-btn.active i {
+            color: #00a896;
+            transform: translateY(-2px);
+        }
+
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="pb-28 select-none">
+
+    <!-- Top Tropical Header & Hero -->
+    <header class="relative w-full h-[380px] overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1548574505-5e2386903d87?auto=format&fit=crop&w=1200&q=80" 
+             alt="Independence of the Seas" 
+             class="absolute inset-0 w-full h-full object-cover object-center scale-105"
+             onerror="this.src='https://placehold.co/1200x800/028090/ffffff?text=Independence+of+the+Seas'">
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-ocean-900/40 via-ocean-800/30 to-[#e0f2fe]"></div>
+
+        <!-- Top Status Bar -->
+        <div class="absolute top-0 left-0 right-0 p-4 flex justify-between items-center z-10">
+            <div class="flex items-center space-x-2 bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-sm border border-white/50">
+                <i class="ph-fill ph-anchor text-ocean-600 text-base"></i>
+                <span class="text-[11px] font-bold tracking-wider text-ocean-800 uppercase">Royal Caribbean</span>
+            </div>
+            <button onclick="toggleOfflineModal()" class="flex items-center space-x-1.5 bg-ocean-600/90 text-white backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-sm text-xs font-semibold active:scale-95 transition-transform">
+                <i class="ph-bold ph-wifi-slash text-sm"></i>
+                <span>Modo Offline</span>
+            </button>
+        </div>
+
+        <!-- Hero Card Content -->
+        <div class="absolute bottom-4 left-0 right-0 px-5 z-10">
+            <div class="inline-flex items-center gap-1.5 bg-sun-500 text-white font-bold px-3 py-1 rounded-full text-xs shadow-md mb-2">
+                <i class="ph-bold ph-sun-horizon"></i> 24 a 29 Outubro, 2026 (5 Noites)
+            </div>
+            <h1 class="text-3xl font-black tracking-tight text-white drop-shadow-md">
+                Bermudas 2026
+            </h1>
+            <p class="text-ocean-50 text-xs font-semibold mt-1 flex items-center gap-1.5 drop-shadow">
+                <i class="ph-fill ph-boat text-sun-300 text-sm"></i> Independence of the Seas
+            </p>
+
+            <!-- Real-Time Countdown Banner -->
+            <div id="countdown-card" class="mt-4 glass-card rounded-2xl p-3 flex justify-around items-center text-center border-ocean-500/20 shadow-lg">
+                <div>
+                    <span id="cd-days" class="block text-2xl font-black text-ocean-800">00</span>
+                    <span class="text-[10px] text-slate-500 uppercase tracking-widest font-extrabold">Dias</span>
+                </div>
+                <div class="h-8 w-px bg-slate-200"></div>
+                <div>
+                    <span id="cd-hours" class="block text-2xl font-black text-ocean-800">00</span>
+                    <span class="text-[10px] text-slate-500 uppercase tracking-widest font-extrabold">Horas</span>
+                </div>
+                <div class="h-8 w-px bg-slate-200"></div>
+                <div>
+                    <span id="cd-mins" class="block text-2xl font-black text-ocean-800">00</span>
+                    <span class="text-[10px] text-slate-500 uppercase tracking-widest font-extrabold">Minutos</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="px-4 max-w-lg mx-auto relative z-20 space-y-6 mt-2">
+
+        <!-- ================= TAB 1: VISÃO GERAL ================= -->
+        <section id="tab-overview" class="tab-content space-y-5">
+            
+            <!-- Welcome Card -->
+            <div class="glass-card-accent rounded-3xl p-5 relative overflow-hidden">
+                <div class="flex items-start gap-4">
+                    <div class="p-3 bg-white/20 rounded-2xl text-white shrink-0">
+                        <i class="ph-fill ph-compass text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-white">Guia da Viagem 🌴</h2>
+                        <p class="text-xs text-ocean-50 leading-relaxed mt-1">
+                            Tudo pronto para o cruzeiro no **Independence of the Seas** rumo às praias e ilhas paradisíacas das Bermudas!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fast Facts Grid -->
+            <div class="grid grid-cols-2 gap-3">
+                <div class="glass-card p-4 rounded-2xl flex flex-col justify-between">
+                    <div class="flex justify-between items-center text-slate-400 text-xs">
+                        <span class="font-bold text-slate-500">Partida</span>
+                        <i class="ph-bold ph-map-pin text-sun-500 text-sm"></i>
+                    </div>
+                    <div class="mt-2">
+                        <span class="text-sm font-extrabold text-slate-800 block">Cape Liberty, NJ</span>
+                        <span class="text-[11px] text-slate-500 font-medium">Bayonne (Nova Iorque)</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-4 rounded-2xl flex flex-col justify-between">
+                    <div class="flex justify-between items-center text-slate-400 text-xs">
+                        <span class="font-bold text-slate-500">Destino</span>
+                        <i class="ph-bold ph-sun text-sun-500 text-sm"></i>
+                    </div>
+                    <div class="mt-2">
+                        <span class="text-sm font-extrabold text-slate-800 block">Kings Wharf</span>
+                        <span class="text-[11px] text-slate-500 font-medium">Royal Naval Dockyard</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Route Summary -->
+            <div class="glass-card rounded-3xl p-4 space-y-3">
+                <h3 class="text-xs font-bold text-ocean-800 uppercase tracking-wider flex items-center gap-2">
+                    <i class="ph-bold ph-path text-ocean-600"></i> Rota Náutica & Destaques
+                </h3>
+                <div class="flex items-center justify-between text-xs py-2 border-b border-slate-100">
+                    <span class="text-slate-600 font-medium">24 Out (Sáb)</span>
+                    <span class="font-bold text-ocean-800">Partida de Cape Liberty (15:00)</span>
+                </div>
+                <div class="flex items-center justify-between text-xs py-2 border-b border-slate-100">
+                    <span class="text-slate-600 font-medium">25 Out (Dom)</span>
+                    <span class="font-bold text-ocean-600">Navegação em Alto Mar</span>
+                </div>
+                <div class="flex items-center justify-between text-xs py-2 border-b border-slate-100">
+                    <span class="text-slate-600 font-medium">26-27 Out</span>
+                    <span class="font-bold text-sun-600">Atracado nas Bermudas</span>
+                </div>
+                <div class="flex items-center justify-between text-xs py-2">
+                    <span class="text-slate-600 font-medium">28-29 Out</span>
+                    <span class="font-bold text-ocean-800">Navegação & Regresso</span>
+                </div>
+            </div>
+
+            <!-- Quick Experience Highlights -->
+            <div class="space-y-3">
+                <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                    <i class="ph-bold ph-sparkle text-sun-500"></i> Destaques Imperdíveis
+                </h3>
+
+                <div onclick="switchTab('bermuda')" class="glass-card rounded-2xl p-3 flex items-center gap-3.5 cursor-pointer active:scale-98 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=200&q=80" alt="Horseshoe" class="w-16 h-16 rounded-xl object-cover shrink-0">
+                    <div class="flex-1 min-w-0">
+                        <span class="text-[10px] uppercase font-bold text-sun-600 tracking-wider">Bermudas</span>
+                        <h4 class="text-sm font-bold text-slate-800 truncate">Praias de Areia Rosa</h4>
+                        <p class="text-xs text-slate-500 truncate mt-0.5">Horseshoe Bay e águas cristalinas.</p>
+                    </div>
+                    <i class="ph-bold ph-caret-right text-slate-400"></i>
+                </div>
+
+                <div onclick="switchTab('ship')" class="glass-card rounded-2xl p-3 flex items-center gap-3.5 cursor-pointer active:scale-98 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=200&q=80" alt="Teatro" class="w-16 h-16 rounded-xl object-cover shrink-0">
+                    <div class="flex-1 min-w-0">
+                        <span class="text-[10px] uppercase font-bold text-ocean-600 tracking-wider">A Bordo</span>
+                        <h4 class="text-sm font-bold text-slate-800 truncate">Shows de Broadway & Gelo</h4>
+                        <p class="text-xs text-slate-500 truncate mt-0.5">Musical Grease no Royal Theater.</p>
+                    </div>
+                    <i class="ph-bold ph-caret-right text-slate-400"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 2: PROGRAMA ================= -->
+        <section id="tab-itinerary" class="tab-content space-y-4 hidden">
+            <div class="flex items-center justify-between">
+                <h2 class="text-base font-bold text-ocean-800">Itinerário Completo</h2>
+                <span class="text-xs font-semibold text-ocean-600 bg-ocean-50 px-2.5 py-1 rounded-full">5 Noites</span>
+            </div>
+
+            <div class="space-y-4">
+                <!-- DAY 1 -->
+                <div class="glass-card rounded-3xl overflow-hidden">
+                    <div class="relative h-28">
+                        <img src="https://images.unsplash.com/photo-1548574505-5e2386903d87?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Embarque">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent"></div>
+                        <div class="absolute bottom-3 left-4 right-4 flex justify-between items-end">
+                            <div>
+                                <span class="bg-sun-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md uppercase">Dia 1 • Sábado</span>
+                                <h3 class="text-sm font-bold text-white mt-0.5">24 Out - Embarque em New Jersey</h3>
+                            </div>
+                            <span class="text-xs font-bold text-sun-300 bg-slate-900/70 px-2 py-1 rounded-lg">Partida 15:00</span>
+                        </div>
+                    </div>
+                    <div class="p-4 space-y-3 text-xs">
+                        <div class="flex items-start gap-3">
+                            <span class="font-bold text-ocean-600 shrink-0">10:30</span>
+                            <p class="text-slate-600"><b>Chegada ao Porto:</b> Cape Liberty Cruise Port (Bayonne, NJ). Entrega de bagagens e check-in no navio.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="font-bold text-ocean-600 shrink-0">12:30</span>
+                            <p class="text-slate-600"><b>Almoço de Boas-Vindas:</b> Buffet no <i>Windjammer Cafe</i> (Deck 11) com vista panorâmica sobre Nova Iorque.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="font-bold text-ocean-600 shrink-0">15:00</span>
+                            <p class="text-slate-600"><b>Partida (Sailaway):</b> Início da navegação pelo Atlântico. Excelente momento no deck superior para fotografias.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="font-bold text-ocean-600 shrink-0">20:00</span>
+                            <p class="text-slate-600"><b>Jantar de Abertura:</b> Restaurante Principal (Main Dining Room). Serviço à carta com menu elegante de 3 pratos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DAY 2 -->
+                <div class="glass-card rounded-3xl overflow-hidden">
+                    <div class="relative h-28">
+                        <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Navegação">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent"></div>
+                        <div class="absolute bottom-3 left-4 right-4 flex justify-between items-end">
+                            <div>
+                                <span class="bg-ocean-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md uppercase">Dia 2 • Domingo</span>
+                                <h3 class="text-sm font-bold text-white mt-0.5">25 Out - Dia de Navegação (Sea Day)</h3>
+                            </div>
+                            <span class="text-xs font-bold text-ocean-100 bg-slate-900/70 px-2 py-1 rounded-lg">Em Alto Mar</span>
+                        </div>
+                    </div>
+                    <div class="p-4 space-y-3 text-xs">
+                        <div class="flex items-start gap-3">
+                            <span class="font-bold text-ocean-600 shrink-0">09:30</span>
+                            <p class="text-slate-600"><b>Manhã Relaxante:</b> Desfrute do Solarium (Deck 11), piscina aquecida e jacuzzis suspensos sobre o oceano.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="font-bold text-ocean-600 shrink-0">15:00</span>
+                            <p class="text-slate-600"><b>Show de Gelo 'Freeze Frame':</b> Espectáculo impressionante de patinagem artística no Studio B (Deck 3).</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="font-bold text-ocean-600 shrink-0">19:30</span>
+                            <p class="text-slate-600"><b>Noite Formal (Formal Night):</b> Jantar especial no Restaurante Principal.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="font-bold text-ocean-600 shrink-0">21:30</span>
+                            <p class="text-slate-600"><b>Musical Grease:</b> A produção oficial da Broadway em exibição no Royal Theater (Deck 3 & 4).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DAY 3 -->
+                <div class="glass-card rounded-3xl overflow-hidden">
+                    <div class="relative h-28">
+                        <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Bermudas">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent"></div>
+                        <div class="absolute bottom-3 left-4 right-4 flex justify-between items-end">
+                            <div>
+                                <span class="bg-emerald-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md uppercase">Dia 3 • Segunda</span>
+                                <h3 class="text-sm font-bold text-white mt-0.5">26 Out - Chegada às Bermudas</h3>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-300 bg-slate-900/70 px-2 py-1 rounded-lg">Chegada 08:00</span>
+                        </div>
+                    </div>
+                    <div class="p-4 space-y-3 text-xs">
+                        <div class="flex items-start gap-3">
+                            <span class="font-bold text-ocean-600 shrink-0">08:00</span>
+                            <p class="text-slate-600"><b>Atracagem em Kings Wharf:</b> O navio chega ao Royal Naval Dockyard. Desembarque aberto a partir das 08:30.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="font-bold text-ocean-600 shrink-0">10:00</span>
+                            <p class="text-slate-600"><b>Praia Horseshoe Bay:</b> Transporte fácil de mini-autocarro até à célebre praia de areia cor-de-rosa.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="font-bold text-ocean-600 shrink-0">15:00</span>
+                            <p class="text-slate-600"><b>Passeio pelo Dockyard:</b> Visita ao Clocktower Mall e lojas locais de artesanato e vidro soprado.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="font-bold text-ocean-600 shrink-0">20:00</span>
+                            <p class="text-slate-600"><b>Pernoita a Bordo:</b> O navio permanece atracado toda a noite no porto.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DAY 4 -->
+                <div class="glass-card rounded-3xl overflow-hidden">
+                    <div class="relative h-28">
+                        <img src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Caves">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent"></div>
+                        <div class="absolute bottom-3 left-4 right-4 flex justify-between items-end">
+                            <div>
+                                <span class="bg-emerald-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md uppercase">Dia 4 • Terça</span>
+                                <h3 class="text-sm font-bold text-white mt-0.5">27 Out - Bermudas & Partida</h3>
+                            </div>
+                            <span class="text-xs font-bold text-sun-300 bg-slate-900/70 px-2 py-1 rounded-lg">Partida 15:30</span>
+                        </div>
+                    </div>
+                    <div class="p-4 space-y-3 text-xs">
+                        <div class="flex items-start gap-3">
+                            <span class="font-bold text-ocean-600 shrink-0">09:30</span>
+                            <p class="text-slate-600"><b>Crystal Caves ou Hamilton:</b> Manhã livre para explorar as grutas cristalinas ou passear na capital Hamilton.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="font-bold text-ocean-600 shrink-0">14:30</span>
+                            <p class="text-slate-600"><b>Todos A Bordo (All Aboard):</b> Hora limite de regresso ao navio.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="font-bold text-ocean-600 shrink-0">15:30</span>
+                            <p class="text-slate-600"><b>Zarpada de Regresso:</b> Início da viagem de regresso pelos mares do Atlântico.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DAY 5 & 6 -->
+                <div class="glass-card rounded-3xl p-4 space-y-3 text-xs">
+                    <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+                        <span class="font-bold text-ocean-800">Dia 5 • 28 Out</span>
+                        <span class="text-slate-500 font-medium">Navegação & Jantar de Despedida</span>
+                    </div>
+                    <p class="text-slate-600">Aproveite o spa, as compras na Royal Promenade e a comemoração final com o espetáculo dos chefes de cozinha no jantar.</p>
+
+                    <div class="flex justify-between items-center border-b border-slate-100 pt-2 pb-2">
+                        <span class="font-bold text-ocean-800">Dia 6 • 29 Out</span>
+                        <span class="text-slate-500 font-medium">Chegada a Cape Liberty (06:00)</span>
+                    </div>
+                    <p class="text-slate-600">Pequeno-almoço final no navio, desembarque assistido e regresso a casa.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 3: O NAVIO ================= -->
+        <section id="tab-ship" class="tab-content space-y-4 hidden">
+            <div class="flex items-center justify-between">
+                <h2 class="text-base font-bold text-ocean-800">Guia do Independence of the Seas</h2>
+                <span class="text-xs font-semibold text-ocean-600 bg-ocean-50 px-2.5 py-1 rounded-full">Explorar A Bordo</span>
+            </div>
+
+            <div class="space-y-3">
+
+                <!-- SHIP ITEM 1: SOLARIUM -->
+                <div class="glass-card rounded-3xl overflow-hidden">
+                    <div class="relative h-32">
+                        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Solarium">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                        <div class="absolute bottom-3 left-4 right-4 flex justify-between items-end">
+                            <div>
+                                <span class="text-[10px] uppercase font-bold text-sun-300 tracking-wider">Deck 11</span>
+                                <h3 class="text-sm font-bold text-white">Solarium & Jacuzzis Suspensos</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 space-y-2">
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Zona tranquila exclusiva para adultos (+18) com piscinas aquecidas, espreguiçadeiras estofadas e dois jacuzzis panorâmicos projetados sobre o oceano.
+                        </p>
+                        <button onclick="toggleExpand(this)" class="w-full pt-2 flex items-center justify-between text-xs font-bold text-ocean-600 hover:text-ocean-800 transition-colors">
+                            <span>Saber mais</span>
+                            <i class="ph-bold ph-caret-down text-base transition-transform duration-300"></i>
+                        </button>
+                        <div class="expand-content space-y-2 text-xs text-slate-600 pt-2 border-t border-slate-100">
+                            <p><b>Ambiente:</b> Espaço coberto e ao ar livre sem barulho, perfeito para ler, relaxar e tomar uma bebida refrescante do Solarium Bar.</p>
+                            <p><b>Jacuzzis Cantilevered:</b> Suspensos a 34 metros de altura sobre as águas do mar, oferecem uma das melhores vistas para o pôr-do-sol.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SHIP ITEM 2: ROYAL PROMENADE -->
+                <div class="glass-card rounded-3xl overflow-hidden">
+                    <div class="relative h-32">
+                        <img src="https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Royal Promenade">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                        <div class="absolute bottom-3 left-4 right-4">
+                            <span class="text-[10px] uppercase font-bold text-sun-300 tracking-wider">Deck 5</span>
+                            <h3 class="text-sm font-bold text-white">Royal Promenade & Cafés</h3>
+                        </div>
+                    </div>
+                    <div class="p-4 space-y-2">
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Avenida interior em mármore no coração do navio, repleta de cafés, pizzaria gratuita, lojas isentas de impostos e desfiles temáticos.
+                        </p>
+                        <button onclick="toggleExpand(this)" class="w-full pt-2 flex items-center justify-between text-xs font-bold text-ocean-600 hover:text-ocean-800 transition-colors">
+                            <span>Saber mais</span>
+                            <i class="ph-bold ph-caret-down text-base transition-transform duration-300"></i>
+                        </button>
+                        <div class="expand-content space-y-2 text-xs text-slate-600 pt-2 border-t border-slate-100">
+                            <p><b>Café Promenade (Incluído):</b> Aberto 24 horas para cafés expressos, chás, sanduíches finas e bolos variados.</p>
+                            <p><b>Sorrento's Pizzeria:</b> Pizzas quentes feitas no forno de pedra prontas a comer a qualquer hora.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SHIP ITEM 3: SHOWS -->
+                <div class="glass-card rounded-3xl overflow-hidden">
+                    <div class="relative h-32">
+                        <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Teatro">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                        <div class="absolute bottom-3 left-4 right-4">
+                            <span class="text-[10px] uppercase font-bold text-sun-300 tracking-wider">Decks 3 & 4</span>
+                            <h3 class="text-sm font-bold text-white">Royal Theater & Studio B (Pista de Gelo)</h3>
+                        </div>
+                    </div>
+                    <div class="p-4 space-y-2">
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Salas de espetáculos imponentes que acolhem produções teatrais completas e uma pista de patinagem no gelo real no meio do oceano.
+                        </p>
+                        <button onclick="toggleExpand(this)" class="w-full pt-2 flex items-center justify-between text-xs font-bold text-ocean-600 hover:text-ocean-800 transition-colors">
+                            <span>Saber mais</span>
+                            <i class="ph-bold ph-caret-down text-base transition-transform duration-300"></i>
+                        </button>
+                        <div class="expand-content space-y-2 text-xs text-slate-600 pt-2 border-t border-slate-100">
+                            <p><b>Grease:</b> O famoso musical da Broadway com elenco internacional e banda ao vivo.</p>
+                            <p><b>Freeze Frame:</b> Patinadores profissionais executam acrobacias impressionantes na pista de gelo do Studio B.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SHIP ITEM 4: LOUNGES -->
+                <div class="glass-card rounded-3xl overflow-hidden">
+                    <div class="relative h-32">
+                        <img src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Schooner Bar">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                        <div class="absolute bottom-3 left-4 right-4">
+                            <span class="text-[10px] uppercase font-bold text-sun-300 tracking-wider">Deck 4</span>
+                            <h3 class="text-sm font-bold text-white">Schooner Bar & Boleros</h3>
+                        </div>
+                    </div>
+                    <div class="p-4 space-y-2">
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Bares acolhedores e elegantes, perfeitos para um cocktail pré-jantar ao som de piano ao vivo ou ritmos latinos.
+                        </p>
+                        <button onclick="toggleExpand(this)" class="w-full pt-2 flex items-center justify-between text-xs font-bold text-ocean-600 hover:text-ocean-800 transition-colors">
+                            <span>Saber mais</span>
+                            <i class="ph-bold ph-caret-down text-base transition-transform duration-300"></i>
+                        </button>
+                        <div class="expand-content space-y-2 text-xs text-slate-600 pt-2 border-t border-slate-100">
+                            <p><b>Schooner Bar:</b> Clássico piano bar com decoração náutica onde pode pedir as suas músicas favoritas ao pianista residente.</p>
+                            <p><b>Boleros Lounge:</b> Ambiente vibrante com cocktails e música ao vivo todas as noites.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= TAB 4: BERMUDAS ================= -->
+        <section id="tab-bermuda" class="tab-content space-y-4 hidden">
+            <div class="flex items-center justify-between">
+                <h2 class="text-base font-bold text-ocean-800">Guia das Bermudas</h2>
+                <span class="text-xs font-semibold text-sun-600 bg-sun-50 px-2.5 py-1 rounded-full">História & Locais</span>
+            </div>
+
+            <div class="space-y-3">
+
+                <!-- BERMUDA 1: HISTÓRIA -->
+                <div class="glass-card rounded-3xl overflow-hidden">
+                    <div class="relative h-36">
+                        <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="História">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                        <div class="absolute bottom-3 left-4 right-4">
+                            <span class="text-[10px] uppercase font-bold text-sun-300 tracking-wider">História & Cultura</span>
+                            <h3 class="text-sm font-bold text-white">História das Ilhas & O Sea Venture (1609)</h3>
+                        </div>
+                    </div>
+                    <div class="p-4 space-y-2">
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Descbertas por Juan de Bermúdez em 1505, as ilhas foram colonizadas em 1609 após o lendário naufrágio do navio inglês *Sea Venture*.
+                        </p>
+                        <button onclick="toggleExpand(this)" class="w-full pt-2 flex items-center justify-between text-xs font-bold text-ocean-600 hover:text-ocean-800 transition-colors">
+                            <span>Saber mais</span>
+                            <i class="ph-bold ph-caret-down text-base transition-transform duration-300"></i>
+                        </button>
+                        <div class="expand-content space-y-2 text-xs text-slate-600 pt-2 border-t border-slate-100">
+                            <p><b>O Naufrágio do Sea Venture:</b> Em 1609, a nau capitânia inglesa a caminho da Virgínia encalhou nos recifes das Bermudas durante um furacão. Os sobreviventes construíram dois novos navios em madeira de cedro e fundaram a colónia britânica.</p>
+                            <p><b>A Tempestade de Shakespeare:</b> Conta a tradição que os relatos deste naufrágio misterioso inspiraram Shakespeare a escrever a sua célebre peça *A Tempestade*.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BERMUDA 2: HORSESHOE BAY -->
+                <div class="glass-card rounded-3xl overflow-hidden">
+                    <div class="relative h-36">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Horseshoe Bay">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                        <div class="absolute bottom-3 left-4 right-4 flex justify-between items-end">
+                            <div>
+                                <span class="text-[10px] uppercase font-bold text-sun-300 tracking-wider">Praia Famosa</span>
+                                <h3 class="text-sm font-bold text-white">Praia Horseshoe Bay (Areia Rosa)</h3>
+                            </div>
+                            <span class="text-[10px] bg-sun-500 text-white px-2 py-0.5 rounded-full font-bold">Imperdível</span>
+                        </div>
+                    </div>
+                    <div class="p-4 space-y-2">
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Uma das praias mais fotografadas do mundo, famosa pelo tom rosa suave das suas areias e águas azul-turquesa tépidas.
+                        </p>
+                        <button onclick="toggleExpand(this)" class="w-full pt-2 flex items-center justify-between text-xs font-bold text-ocean-600 hover:text-ocean-800 transition-colors">
+                            <span>Saber mais</span>
+                            <i class="ph-bold ph-caret-down text-base transition-transform duration-300"></i>
+                        </button>
+                        <div class="expand-content space-y-2 text-xs text-slate-600 pt-2 border-t border-slate-100">
+                            <p><b>Porquê Areia Rosa?</b> A cor rosada resulta de partículas microscópicas de conchas vermelhas de foraminíferos esmagadas e misturadas com o calcário branco.</p>
+                            <p><b>Baby Beach:</b> Do lado esquerdo existe uma enseada rasa totalmente protegida por rochas, ideal para banhos calmos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BERMUDA 3: CRYSTAL CAVES -->
+                <div class="glass-card rounded-3xl overflow-hidden">
+                    <div class="relative h-36">
+                        <img src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Crystal Caves">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                        <div class="absolute bottom-3 left-4 right-4">
+                            <span class="text-[10px] uppercase font-bold text-sun-300 tracking-wider">Natureza</span>
+                            <h3 class="text-sm font-bold text-white">Crystal & Fantasy Caves</h3>
+                        </div>
+                    </div>
+                    <div class="p-4 space-y-2">
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Grutas subterrâneas espetaculares descobertas em 1907, com milhares de estalactites sobre lagos de água marinha translúcida.
+                        </p>
+                        <button onclick="toggleExpand(this)" class="w-full pt-2 flex items-center justify-between text-xs font-bold text-ocean-600 hover:text-ocean-800 transition-colors">
+                            <span>Saber mais</span>
+                            <i class="ph-bold ph-caret-down text-base transition-transform duration-300"></i>
+                        </button>
+                        <div class="expand-content space-y-2 text-xs text-slate-600 pt-2 border-t border-slate-100">
+                            <p><b>Descoberta:</b> Encontradas por acaso por dois rapazes que procuravam uma bola de críquete perdida.</p>
+                            <p><b>Pontes Flutuantes:</b> A visita é feita sobre passadiços flutuantes com iluminação artística que revela o fundo cristalino do lago a 15 metros de profundidade.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BERMUDA 4: DOCKYARD -->
+                <div class="glass-card rounded-3xl overflow-hidden">
+                    <div class="relative h-36">
+                        <img src="https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Dockyard">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                        <div class="absolute bottom-3 left-4 right-4">
+                            <span class="text-[10px] uppercase font-bold text-sun-300 tracking-wider">O Porto</span>
+                            <h3 class="text-sm font-bold text-white">Royal Naval Dockyard & Clocktower</h3>
+                        </div>
+                    </div>
+                    <div class="p-4 space-y-2">
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            A fortaleza onde o navio atraca, construída pela Marinha Britânica no século XIX, hoje um centro vivo de lojas, museu marítimo e artesanato.
+                        </p>
+                        <button onclick="toggleExpand(this)" class="w-full pt-2 flex items-center justify-between text-xs font-bold text-ocean-600 hover:text-ocean-800 transition-colors">
+                            <span>Saber mais</span>
+                            <i class="ph-bold ph-caret-down text-base transition-transform duration-300"></i>
+                        </button>
+                        <div class="expand-content space-y-2 text-xs text-slate-600 pt-2 border-t border-slate-100">
+                            <p><b>Clocktower Mall:</b> Centro comercial instalado nos antigos edifícios de pedra da marinha britânica.</p>
+                            <p><b>Vidro Soprado:</b> Oficina de artesãos onde pode assistir ao vivo ao fabrico de peças coloridas em vidro soprado.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BERMUDA 5: GASTRONOMIA -->
+                <div class="glass-card rounded-3xl p-4 space-y-2">
+                    <h3 class="text-xs font-bold text-ocean-800 uppercase tracking-wider flex items-center gap-2">
+                        <i class="ph-bold ph-cooking-pot text-sun-500"></i> Especialidades Locais
+                    </h3>
+                    <div class="space-y-1.5 text-xs text-slate-600">
+                        <p>• <b>Rum Swizzle:</b> O cocktail nacional das Bermudas com rum Gosling's e sumos tropicais.</p>
+                        <p>• <b>Sopa de Peixe (Fish Chowder):</b> Sopa rica temperada com rum escuro e molho sherry pepper.</p>
+                        <p>• <b>Bolo de Rum (Rum Cake):</b> Deliciosa especialidade das pastelarias locais.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= TAB 5: LISTAS ================= -->
+        <section id="tab-checklist" class="tab-content space-y-4 hidden">
+            <div class="flex items-center justify-between">
+                <h2 class="text-base font-bold text-ocean-800">Lista de Verificação</h2>
+                <span id="checklist-counter" class="text-xs font-bold text-ocean-600 bg-ocean-50 px-2.5 py-1 rounded-full">0/6 Concluído</span>
+            </div>
+
+            <!-- Documents Checklist Card -->
+            <div class="glass-card rounded-3xl p-4 space-y-3">
+                <h3 class="text-xs font-bold text-ocean-800 uppercase tracking-wider flex items-center gap-2">
+                    <i class="ph-bold ph-file-text text-ocean-600"></i> Documentos & Essenciais
+                </h3>
+                <div class="space-y-2 text-xs">
+                    <label class="flex items-center gap-3 p-3 rounded-2xl bg-white border border-slate-100 cursor-pointer shadow-sm">
+                        <input type="checkbox" onchange="updateChecklist()" class="chk-item w-4 h-4 accent-ocean-600 rounded">
+                        <span class="text-slate-700 font-medium">Passaporte Válido</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 rounded-2xl bg-white border border-slate-100 cursor-pointer shadow-sm">
+                        <input type="checkbox" onchange="updateChecklist()" class="chk-item w-4 h-4 accent-ocean-600 rounded">
+                        <span class="text-slate-700 font-medium">Autorização ESTA para entrada nos EUA</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 rounded-2xl bg-white border border-slate-100 cursor-pointer shadow-sm">
+                        <input type="checkbox" onchange="updateChecklist()" class="chk-item w-4 h-4 accent-ocean-600 rounded">
+                        <span class="text-slate-700 font-medium">SetSail Pass na App Royal Caribbean</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 rounded-2xl bg-white border border-slate-100 cursor-pointer shadow-sm">
+                        <input type="checkbox" onchange="updateChecklist()" class="chk-item w-4 h-4 accent-ocean-600 rounded">
+                        <span class="text-slate-700 font-medium">Cartões de Crédito & Moeda (USD)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Luggage Checklist Card -->
+            <div class="glass-card rounded-3xl p-4 space-y-3">
+                <h3 class="text-xs font-bold text-ocean-800 uppercase tracking-wider flex items-center gap-2">
+                    <i class="ph-bold ph-suitcase text-ocean-600"></i> Mala de Viagem
+                </h3>
+                <div class="space-y-2 text-xs">
+                    <label class="flex items-center gap-3 p-3 rounded-2xl bg-white border border-slate-100 cursor-pointer shadow-sm">
+                        <input type="checkbox" onchange="updateChecklist()" class="chk-item w-4 h-4 accent-ocean-600 rounded">
+                        <span class="text-slate-700 font-medium">Etiquetas de Bagagem impressas e colocadas</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 rounded-2xl bg-white border border-slate-100 cursor-pointer shadow-sm">
+                        <input type="checkbox" onchange="updateChecklist()" class="chk-item w-4 h-4 accent-ocean-600 rounded">
+                        <span class="text-slate-700 font-medium">Mala de mão com medicamentos e muda de roupa</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar (5 Fixed Tabs) -->
+    <nav class="fixed bottom-0 left-0 right-0 glass-nav z-50 px-2 py-2">
+        <div class="max-w-lg mx-auto flex justify-around items-center text-[10px]">
+            <button onclick="switchTab('overview')" id="nav-overview" class="tab-btn active flex flex-col items-center py-1 px-2.5">
+                <i class="ph-bold ph-house text-xl mb-0.5"></i>
+                <span>Geral</span>
+            </button>
+
+            <button onclick="switchTab('itinerary')" id="nav-itinerary" class="tab-btn flex flex-col items-center py-1 px-2.5">
+                <i class="ph-bold ph-calendar-blank text-xl mb-0.5"></i>
+                <span>Programa</span>
+            </button>
+
+            <button onclick="switchTab('ship')" id="nav-ship" class="tab-btn flex flex-col items-center py-1 px-2.5">
+                <i class="ph-bold ph-boat text-xl mb-0.5"></i>
+                <span>O Navio</span>
+            </button>
+
+            <button onclick="switchTab('bermuda')" id="nav-bermuda" class="tab-btn flex flex-col items-center py-1 px-2.5">
+                <i class="ph-bold ph-sun text-xl mb-0.5"></i>
+                <span>Bermudas</span>
+            </button>
+
+            <button onclick="switchTab('checklist')" id="nav-checklist" class="tab-btn flex flex-col items-center py-1 px-2.5">
+                <i class="ph-bold ph-check-square-offset text-xl mb-0.5"></i>
+                <span>Listas</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Offline Modal -->
+    <div id="offline-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-card rounded-3xl p-6 max-w-sm w-full space-y-4 text-center">
+            <div class="w-12 h-12 rounded-full bg-ocean-50 text-ocean-600 flex items-center justify-center text-2xl mx-auto border border-ocean-100">
+                <i class="ph-bold ph-wifi-slash"></i>
+            </div>
+            <div>
+                <h3 class="text-base font-bold text-slate-800">Modo Sem Internet</h3>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                    Esta aplicação guarda as informações no seu telemóvel para funcionar <b>100% sem internet</b> durante a navegação em alto mar.
+                </p>
+            </div>
+            <button onclick="toggleOfflineModal()" class="w-full py-3 bg-ocean-600 hover:bg-ocean-800 text-white font-bold rounded-2xl text-xs transition-colors shadow-md">
+                Entendido
+            </button>
+        </div>
+    </div>
+
+    <!-- PWA & Application Logic -->
+    <script>
+        // Tab Navigation Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            const targetTab = document.getElementById(`tab-${tabId}`);
+            if (targetTab) targetTab.classList.remove('hidden');
+
+            const targetNav = document.getElementById(`nav-${tabId}`);
+            if (targetNav) targetNav.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Expandable Cards Accordion
+        function toggleExpand(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.add('open');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Countdown Timer Logic
+        function updateCountdown() {
+            const cruiseDate = new Date('2026-10-24T15:00:00').getTime();
+            const now = new Date().getTime();
+            const diff = cruiseDate - now;
+
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+                document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
+                document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('cd-mins').innerText = String(mins).padStart(2, '0');
+            } else {
+                document.getElementById('countdown-card').innerHTML = '<span class="text-ocean-800 font-bold text-xs">🚢 A viagem começou!</span>';
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Checklist Counter Update
+        function updateChecklist() {
+            const checkboxes = document.querySelectorAll('.chk-item');
+            const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+            document.getElementById('checklist-counter').innerText = `${checked}/${checkboxes.length} Concluído`;
+        }
+
+        // Toggle Offline Modal
+        function toggleOfflineModal() {
+            document.getElementById('offline-modal').classList.toggle('hidden');
+        }
+
+        // Register Inline Service Worker for Offline Mode
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swCode = `
+                    const CACHE_NAME = 'bermuda-tropical-v1';
+                    self.addEventListener('install', e => {
+                        e.waitUntil(
+                            caches.open(CACHE_NAME).then(cache => cache.addAll(['./']))
+                        );
+                    });
+                    self.addEventListener('fetch', e => {
+                        e.respondWith(
+                            caches.match(e.request).then(res => res || fetch(e.request))
+                        );
+                    });
+                `;
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+            });
+        }
+    </script>
+</body>
+</html>
