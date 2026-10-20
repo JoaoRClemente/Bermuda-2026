@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Cruzeiro Bermudas 2026</title>
+  
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#028090">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="description" content="Guia de Viagem das Bermudas & Independence of the Seas">
+
+  <!-- Manifest Inline (Data URI) -->
+  <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkNydXplaXJvIEJlcm11ZGFzIDIwMjYiLAogICJzaG9ydF9uYW1lIjogIkNydXplaXJvIDIwMjYiLAogICJzdGFydF91cmwiOiAiLi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMjgwOTAiLAogICJ0aGVtZV9jb2xvcIjogIiMwMjgwOTAiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBIOW5JSENqYUd3Z2RHVnpkR3sdSUdadmJuUmZZMjlzYjNKZklqNG5MREV3SWo0S1BDOWhSREV3SWo0SyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIKICAgIH0KICBdCn0=">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #028090;
+      --primary-dark: #05668D;
+      --secondary: #00A896;
+      --accent: #F4A261;
+      --accent-light: #E9C46A;
+      --bg-main: #F0F8FF;
+      --card-bg: #FFFFFF;
+      --text-main: #1D2A44;
+      --text-muted: #5A6E85;
+      --border: #D0E3F0;
+      --shadow: 0 8px 24px rgba(2, 128, 144, 0.08);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      padding-bottom: 90px;
+      max-width: 500px;
+      margin: 0 auto;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: white;
+      padding: 24px 20px;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      box-shadow: 0 4px 20px rgba(5, 102, 141, 0.2);
+    }
+
+    .header-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-subtitle {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+
+    /* Countdown Card */
+    .countdown-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+    }
+
+    .countdown-item .num {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent-light);
+    }
+
+    .countdown-item .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      opacity: 0.8;
+    }
+
+    /* Main Content Area */
+    main {
+      padding: 20px;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section Titles */
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .card-img {
+      width: calc(100% + 36px);
+      height: 180px;
+      margin: -18px -18px 14px -18px;
+      object-fit: cover;
+    }
+
+    .card-header-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .card-badge {
+      background: #E0F2FE;
+      color: var(--primary-dark);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .card-text {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Expandable Details */
+    .expandable-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, margin-top 0.3s ease;
+    }
+
+    .expandable-details.open {
+      max-height: 1000px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border);
+    }
+
+    .btn-expand {
+      background: none;
+      border: none;
+      color: var(--secondary);
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 8px 0 0 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      width: 100%;
+    }
+
+    /* Timeline / Itinerary */
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -20px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    .timeline-date {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--secondary);
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    /* Checklist */
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .checklist-item:last-child {
+      border-bottom: none;
+    }
+
+    .checklist-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--secondary);
+      cursor: pointer;
+    }
+
+    .checklist-item label {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    /* Bottom Navigation Bar */
+    nav.bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 500px;
+      background: #FFFFFF;
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.06);
+      border-top: 1px solid var(--border);
+      z-index: 1000;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 20%;
+      transition: color 0.2s ease;
+    }
+
+    .nav-btn i {
+      font-size: 1.1rem;
+    }
+
+    .nav-btn.active {
+      color: var(--secondary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-title">
+      <i class="fa-solid fa-ship"></i> Bermudas 2026
+    </div>
+    <div class="header-subtitle">Independence of the Seas • 24 a 29 Outubro</div>
+    
+    <div class="countdown-card">
+      <div class="countdown-item">
+        <div class="num" id="dias">--</div>
+        <div class="label">Dias</div>
+      </div>
+      <div class="countdown-item">
+        <div class="num" id="horas">--</div>
+        <div class="label">Horas</div>
+      </div>
+      <div class="countdown-item">
+        <div class="num" id="minutos">--</div>
+        <div class="label">Minutos</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    
+    <!-- ABA 1: GERAL -->
+    <div id="tab-geral" class="tab-content active">
+      <div class="section-title">
+        <i class="fa-solid fa-compass"></i> Resumo da Viagem
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1548574505-5e2386903d87?auto=format&fit=crop&w=800&q=80" class="card-img" alt="Cruzeiro">
+        <div class="card-title">A Sua Experiência no Mar</div>
+        <div class="card-text" style="margin-top: 6px;">
+          Uma viagem inesquecível de 5 noites a bordo do prestigiado <strong>Independence of the Seas</strong> rumo ao arquipélago das Bermudas. Desfrute do oceano, de restaurantes premiados, espectáculos de nível internacional e praias paradisíacas.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom: 12px;">Informações Importantes</div>
+        <div class="card-text">
+          <p style="margin-bottom: 8px;"><strong><i class="fa-solid fa-anchor"></i> Navio:</strong> Independence of the Seas (Royal Caribbean)</p>
+          <p style="margin-bottom: 8px;"><strong><i class="fa-solid fa-location-dot"></i> Partida:</strong> Cape Liberty, NJ (EUA)</p>
+          <p style="margin-bottom: 8px;"><strong><i class="fa-solid fa-umbrella-beach"></i> Destino:</strong> Royal Naval Dockyard, Bermudas</p>
+          <p><strong><i class="fa-solid fa-id-card"></i> Check-in:</strong> Disponível na App Royal Caribbean 45 dias antes.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 2: PROGRAMA -->
+    <div id="tab-programa" class="tab-content">
+      <div class="section-title">
+        <i class="fa-solid fa-calendar-days"></i> Itinerário Diário
+      </div>
+
+      <div class="timeline">
+        
+        <div class="timeline-item">
+          <div class="card">
+            <div class="card-header-flex">
+              <div class="card-title">Dia 1: Embarque & Partida</div>
+              <span class="card-badge">24 OUT</span>
+            </div>
+            <div class="card-text">Embarque em Cape Liberty (Nova Jérsia). Boas-vindas a bordo, almoço no Windjammer e festa de partida no convés principal à saída de Nova Iorque.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="card">
+            <div class="card-header-flex">
+              <div class="card-title">Dia 2: Dia no Mar</div>
+              <span class="card-badge">25 OUT</span>
+            </div>
+            <div class="card-text">Dia dedicado a explorar o navio. Desfrute do Solarium para adultos, assista ao espetáculo no gelo no Studio B e ao musical 'Grease' à noite.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="card">
+            <div class="card-header-flex">
+              <div class="card-title">Dia 3: Chegada às Bermudas</div>
+              <span class="card-badge">26 OUT</span>
+            </div>
+            <div class="card-text">Atracagem no Royal Naval Dockyard às 09:00. Visita às praias de areia rosa de Horseshoe Bay e passeio pelas lojas de artesanato do Clocktower Mall.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="card">
+            <div class="card-header-flex">
+              <div class="card-title">Dia 4: Exploração & Navegação</div>
+              <span class="card-badge">27 OUT</span>
+            </div>
+            <div class="card-text">Manhã nas Bermudas para visitar as grutas Crystal Caves ou St. George's. Partida do navio às 15:00 com navegação ao pôr-do-sol.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="card">
+            <div class="card-header-flex">
+              <div class="card-title">Dia 5: Relaxamento no Mar</div>
+              <span class="card-badge">28 OUT</span>
+            </div>
+            <div class="card-text">Último dia para desfrutar da gastronomia a bordo, ouvir música ao vivo no Schooner Bar e preparar as malas com tranquilidade.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="card">
+            <div class="card-header-flex">
+              <div class="card-title">Dia 6: Regresso</div>
+              <span class="card-badge">29 OUT</span>
+            </div>
+            <div class="card-text">Chegada a Cape Liberty às 06:00. Pequeno-almoço e desembarque calmo e organizado.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ABA 3: O NAVIO -->
+    <div id="tab-navio" class="tab-content">
+      <div class="section-title">
+        <i class="fa-solid fa-ship"></i> Guia do Independence of the Seas
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1599640842225-85d111c60e6b?auto=format&fit=crop&w=800&q=80" class="card-img" alt="Solarium">
+        <div class="card-title">Solarium (Deck 11)</div>
+        <div class="card-text">Espaço de tranquilidade exclusivo para adultos, com jacuzzi suspenso sobre o oceano, espreguiçadeiras estofadas e bar dedicado.</div>
+        <button class="btn-expand" onclick="toggleDetails(this)">
+          Saber mais <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="expandable-details">
+          <div class="card-text">
+            O Solarium é uma zona coberta e ao ar livre projetada para o máximo conforto e sossego. Sem música alta, oferece uma vista panorâmica deslumbrante para a proa do navio. É o local ideal para ler um livro ou relaxar no jacuzzi aquecido.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80" class="card-img" alt="Royal Promenade">
+        <div class="card-title">Royal Promenade (Deck 5)</div>
+        <div class="card-text">A avenida principal no interior do navio, repleta de cafés, lojas, música ao vivo e animação ao longo de todo o dia.</div>
+        <button class="btn-expand" onclick="toggleDetails(this)">
+          Saber mais <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="expandable-details">
+          <div class="card-text">
+            Projetada como uma rua da cidade sob teto de vidro, na Royal Promenade encontra o Café Promenade (com snacks e cafés gratuitos 24h), lojas isentas de impostos e desfiles temáticos. É a artéria central perfeita para passear a qualquer hora.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80" class="card-img" alt="Espetáculos">
+        <div class="card-title">Teatro & Espetáculos</div>
+        <div class="card-text">Entretenimento ao nível da Broadway no Royal Theater e espetáculos únicos de patinagem no gelo no Studio B.</div>
+        <button class="btn-expand" onclick="toggleDetails(this)">
+          Saber mais <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="expandable-details">
+          <div class="card-text">
+            Todos os espetáculos estão incluídos no cruzeiro. Destaque para o prestigiado musical 'Grease' no teatro principal e para as acrobacias dos patinadores profissionais na pista de gelo real em pleno oceano. Recomenda-se chegar 20 minutos antes para bons lugares.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ABA 4: BERMUDAS -->
+    <div id="tab-bermudas" class="tab-content">
+      <div class="section-title">
+        <i class="fa-solid fa-umbrella-beach"></i> Guia das Bermudas
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" class="card-img" alt="Horseshoe Bay">
+        <div class="card-title">Horseshoe Bay Beach</div>
+        <div class="card-text">Uma das praias mais famosas do mundo, conhecida pelas suas águas azul-turquesa e areia com tonalidade rosa natural.</div>
+        <button class="btn-expand" onclick="toggleDetails(this)">
+          Saber mais <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="expandable-details">
+          <div class="card-text">
+            <strong>História & Ciência:</strong> O tom rosa característico da areia provém de micróbios marinhos chamados foraminíferos, cujas conchas cor-de-rosa se misturam com o coral esmagado. A praia conta com passadiços, aluguer de espreguiçadeiras, restauração e táxis diretos a partir do porto.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" class="card-img" alt="Crystal Caves">
+        <div class="card-title">Crystal & Fantasy Caves</div>
+        <div class="card-text">Grutas subterrâneas espetaculares com estalactites cristalinas sobre lagos de água translúcida.</div>
+        <button class="btn-expand" onclick="toggleDetails(this)">
+          Saber mais <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="expandable-details">
+          <div class="card-text">
+            <strong>Descoberta em 1907:</strong> Descobertas acidentalmente por dois rapazes a jogar críquete, estas grutas têm mais de 30 milhões de anos. O percurso é feito com iluminação através de pontes flutuantes seguras sobre o lago subterrâneo de 17 metros de profundidade.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" class="card-img" alt="Dockyard">
+        <div class="card-title">Royal Naval Dockyard</div>
+        <div class="card-text">O ponto de acostagem do navio. Um complexo histórico fortificado do século XIX recheado de cultura e comércio.</div>
+        <button class="btn-expand" onclick="toggleDetails(this)">
+          Saber mais <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="expandable-details">
+          <div class="card-text">
+            Construído pela Marinha Real Britânica após a Guerra da Independência Americana, acolhe hoje o Museu Nacional das Bermudas, oficinas de artesanato de sopro de vidro, o centro comercial Clocktower Mall e o ponto de partida dos ferries para a capital, Hamilton.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ABA 5: LISTAS -->
+    <div id="tab-listas" class="tab-content">
+      <div class="section-title">
+        <i class="fa-solid fa-list-check"></i> Lista de Verificação
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom: 12px;">Documentos & Preparativos</div>
+        
+        <div class="checklist-item">
+          <input type="checkbox" id="c1">
+          <label for="c1">Passaportes Válidos</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2">
+          <label for="c2">SetSail Pass (Check-in Royal Caribbean)</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c3">
+          <label for="c3">Cartões de Crédito & Dólares</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c4">
+          <label for="c4">Medicamentos Habituais</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c5">
+          <label for="c5">Protetor Solar & Chapéu</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c6">
+          <label for="c6">Adaptador de Tomada (EUA)</label>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" onclick="switchTab('geral', this)">
+      <i class="fa-solid fa-house"></i>
+      <span>Geral</span>
+    </button>
+    <button class="nav-btn" onclick="switchTab('programa', this)">
+      <i class="fa-solid fa-calendar"></i>
+      <span>Programa</span>
+    </button>
+    <button class="nav-btn" onclick="switchTab('navio', this)">
+      <i class="fa-solid fa-ship"></i>
+      <span>O Navio</span>
+    </button>
+    <button class="nav-btn" onclick="switchTab('bermudas', this)">
+      <i class="fa-solid fa-sun"></i>
+      <span>Bermudas</span>
+    </button>
+    <button class="nav-btn" onclick="switchTab('listas', this)">
+      <i class="fa-solid fa-check-double"></i>
+      <span>Listas</span>
+    </button>
+  </nav>
+
+  <script>
+    // Tab Navigation System
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.querySelectorAll('.nav-btn').forEach(b => {
+        b.classList.remove('active');
+      });
+
+      document.getElementById('tab-' + tabId).classList.add('active');
+      btn.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Expandable Cards
+    function toggleDetails(btn) {
+      const details = btn.nextElementSibling;
+      const isExpanded = details.classList.contains('open');
+
+      if (isExpanded) {
+        details.classList.remove('open');
+        btn.innerHTML = 'Saber mais <i class="fa-solid fa-chevron-down"></i>';
+      } else {
+        details.classList.add('open');
+        btn.innerHTML = 'Mostrar menos <i class="fa-solid fa-chevron-up"></i>';
+      }
+    }
+
+    // Real-time Countdown Timer
+    function updateCountdown() {
+      const targetDate = new Date('October 24, 2026 11:00:00').getTime();
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+
+        document.getElementById('dias').innerText = days;
+        document.getElementById('horas').innerText = hours;
+        document.getElementById('minutos').innerText = minutes;
+      } else {
+        document.getElementById('dias').innerText = '0';
+        document.getElementById('horas').innerText = '0';
+        document.getElementById('minutos').innerText = '0';
+      }
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Embedded Service Worker for Full Offline Support
+    if ('serviceWorker' in navigator) {
+      const swCode = `
+        const CACHE_NAME = 'cruzeiro-v1';
+        self.addEventListener('install', e => {
+          e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(['./'])));
+        });
+        self.addEventListener('fetch', e => {
+          e.respondWith(caches.match(e.request).then(res => res || fetch(e.request)));
+        });
+      `;
+      const blob = new Blob([swCode], { type: 'application/javascript' });
+      const swUrl = URL.createObjectURL(blob);
+      navigator.serviceWorker.register(swUrl).catch(() => {});
+    }
+  </script>
+</body>
+</html>
